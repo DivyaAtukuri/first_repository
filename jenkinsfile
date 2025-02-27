@@ -1,0 +1,30 @@
+pipeline{
+    agent any
+    stages{
+        stage("Build"){
+            steps{
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+        stage("Test"){
+            steps{
+                sh 'mvn test'
+            }
+            post{
+                always{
+                    echo "post"
+                }
+            }
+        }
+        stage("stage3"){
+            steps{
+                echo "This is stage3"
+            }
+        }
+        stage("stage4"){
+            steps{
+                echo "This is stage4"
+            }
+        }
+    }
+}
